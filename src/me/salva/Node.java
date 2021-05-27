@@ -3,11 +3,11 @@ package me.salva;
 import java.util.ArrayList;
 
 public class Node {
-    private String name;
-    private ArrayList<Edge> edges;
+    private final String name;
+    private final ArrayList<Edge> edges;
 
     public Node(String name) {
-        this.setName(name);
+        this.name = name;
         this.edges = new ArrayList<>();
     }
 
@@ -19,15 +19,7 @@ public class Node {
         return name;
     }
 
-    public void setName(String name) {
-        this.name = name;
-    }
-
     public ArrayList<Edge> getEdges() {
         return edges;
-    }
-
-    public void setEdges(ArrayList<Edge> edges) {
-        this.edges = edges;
     }
 }

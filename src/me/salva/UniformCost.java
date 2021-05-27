@@ -11,7 +11,7 @@ public class UniformCost {
         while (!priorityQueue.isEmpty()) {
             var minPriority = getMinPriority(priorityQueue);
 
-            if (minPriority.node == meta) {
+            if (minPriority.getNode() == meta) {
                 return minPriority;
             }
 
@@ -22,7 +22,7 @@ public class UniformCost {
     }
 
     private void expandChildNodes(ArrayList<Priority> priorityQueue, Priority priority) {
-        for (Edge edge : priority.node.getEdges()) {
+        for (Edge edge : priority.getNode().getEdges()) {
             priorityQueue.add(new Priority(edge.getDestination(), edge.getCost() + priority.getCost(), priority.getPath()));
         }
     }

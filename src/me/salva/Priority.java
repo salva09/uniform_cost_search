@@ -3,7 +3,7 @@ package me.salva;
 import java.util.ArrayList;
 
 public class Priority {
-    Node node;
+    private final Node node;
     private final Float cost;
     private final ArrayList<Node> path;
 
@@ -11,7 +11,7 @@ public class Priority {
         this.node = nodes;
         this.cost = cost;
         this.path = path;
-        path.add(node);
+        path.add(getNode());
     }
 
     public ArrayList<Node> getPath() {
@@ -20,5 +20,9 @@ public class Priority {
 
     public Float getCost() {
         return cost;
+    }
+
+    public Node getNode() {
+        return node;
     }
 }

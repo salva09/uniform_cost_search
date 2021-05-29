@@ -8,28 +8,28 @@ public class AStar extends UniformCost {
     }
 
     @Override
-    boolean metaReached(Node meta, Priority minPriority) {
-        for (Priority priority: priorityQueue) {
-            if (priority.getNode() == meta) {
-                return true;
+    public Priority search(Node start, Node meta) {
+        priorityQueue.add(new Priority(start, 0f, new ArrayList<>()));
+
+        while (!priorityQueue.isEmpty()) {
+            var minPriority = priorityQueue.get(0);
+
+            for (Priority priority : priorityQueue) {
+                if (priority.getNode() == meta) {
+                    return minPriority;
+                }
+
+                var priorityWeight = priority.getCost() + priority.getNode().getHeuristic();
+                var minCostPriorityWeight = minPriority.getCost() + minPriority.getNode().getHeuristic();
+
+                if (priorityWeight < minCostPriorityWeight) {
+                    minPriority = priority;
+                }
             }
+
+            expandChildNodes(minPriority);
+            priorityQueue.remove(minPriority);
         }
-        return false;
-    }
-
-    @Override
-    public Priority getMinPriority() {
-        Priority minCostPriority = priorityQueue.get(0);
-
-        for (Priority priority : priorityQueue) {
-            var priorityWeight = priority.getCost() + priority.getNode().getHeuristic();
-            var minCostPriorityWeight = minCostPriority.getCost() + minCostPriority.getNode().getHeuristic();
-
-            if (priorityWeight < minCostPriorityWeight) {
-                minCostPriority = priority;
-            }
-        }
-
-        return minCostPriority;
+        return null;
     }
 }

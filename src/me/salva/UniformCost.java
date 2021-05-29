@@ -15,7 +15,7 @@ public class UniformCost {
         while (!priorityQueue.isEmpty()) {
             var minPriority = getMinPriority();
 
-            if (minPriority.getNode() == meta) {
+            if (metaReached(meta, minPriority)) {
                 return minPriority;
             }
 
@@ -23,6 +23,10 @@ public class UniformCost {
             priorityQueue.remove(minPriority);
         }
         return null;
+    }
+
+    boolean metaReached(Node meta, Priority minPriority) {
+        return minPriority.getNode() == meta;
     }
 
     void expandChildNodes(Priority priority) {

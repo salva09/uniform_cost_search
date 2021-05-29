@@ -10,8 +10,8 @@ public class Priority {
     public Priority(Node nodes, Float cost, ArrayList<Node> path) {
         this.node = nodes;
         this.cost = cost;
-        this.path = path;
         path.add(getNode());
+        this.path = path;
     }
 
     public ArrayList<Node> getPath() {

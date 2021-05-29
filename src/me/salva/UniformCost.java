@@ -3,34 +3,38 @@ package me.salva;
 import java.util.*;
 
 public class UniformCost {
-    public Priority search(Node start, Node meta) {
-        ArrayList<Priority> priorityQueue = new ArrayList<>();
+    final ArrayList<Priority> priorityQueue;
 
+    public UniformCost() {
+        this.priorityQueue = new ArrayList<>();
+    }
+
+    public Priority search(Node start, Node meta) {
         priorityQueue.add(new Priority(start, 0f, new ArrayList<>()));
 
         while (!priorityQueue.isEmpty()) {
-            var minPriority = getMinPriority(priorityQueue);
+            var minPriority = getMinPriority();
 
             if (minPriority.getNode() == meta) {
                 return minPriority;
             }
 
-            expandChildNodes(priorityQueue, minPriority);
+            expandChildNodes(minPriority);
             priorityQueue.remove(minPriority);
         }
         return null;
     }
 
-    private void expandChildNodes(ArrayList<Priority> priorityQueue, Priority priority) {
+    void expandChildNodes(Priority priority) {
         for (Edge edge : priority.getNode().getEdges()) {
             priorityQueue.add(new Priority(edge.getDestination(), edge.getCost() + priority.getCost(), priority.getPath()));
         }
     }
 
-    public Priority getMinPriority(ArrayList<Priority> priorities) {
-        Priority minCostPriority = priorities.get(0);
+    Priority getMinPriority() {
+        Priority minCostPriority = priorityQueue.get(0);
 
-        for (Priority priority : priorities) {
+        for (Priority priority : priorityQueue) {
             if (priority.getCost() < minCostPriority.getCost()) {
                 minCostPriority = priority;
             }

@@ -7,6 +7,7 @@ public class AStar extends UniformCost {
         super();
     }
 
+    @Override
     public Priority search(Node start, Node meta) {
         priorityQueue.add(new Priority(start, 0f, new ArrayList<>()));
 

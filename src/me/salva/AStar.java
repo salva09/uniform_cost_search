@@ -16,7 +16,7 @@ public class AStar extends UniformCost {
 
             for (Priority priority : priorityQueue) {
                 if (priority.getNode() == meta) {
-                    return minPriority;
+                    return priority;
                 }
 
                 var priorityWeight = priority.getCost() + priority.getNode().getHeuristic();
